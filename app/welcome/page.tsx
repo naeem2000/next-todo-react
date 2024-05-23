@@ -15,15 +15,15 @@ export default function Welcome() {
 				</p>
 				<br />
 				<p>
-					Whether you're a busy professional, a student with deadlines looming,
-					or a parent juggling multiple responsibilities, Mira is here to
-					simplify your life. With intuitive features, customizable lists, and
-					seamless collaboration options, staying organized has never been
+					Whether you&apos;re a busy professional, a student with deadlines
+					looming, or a parent juggling multiple responsibilities, Mira is here
+					to simplify your life. With intuitive features, customizable lists,
+					and seamless collaboration options, staying organized has never been
 					easier. Join the Mira community today and unleash your productivity
 					potential!
 				</p>
 				<Link href={'/todo'} rel='noreferrer'>
-					Let's get started
+					Let&apos;s get started
 				</Link>
 			</div>
 		</section>
