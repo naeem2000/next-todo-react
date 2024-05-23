@@ -1,7 +1,10 @@
+import Welcome from './welcome/page';
+import './page.scss';
+
 export default function Home() {
 	return (
 		<>
-			<h1>Home</h1>
+			<Welcome />
 		</>
 	);
 }
