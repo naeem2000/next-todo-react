@@ -2,10 +2,13 @@
 
 import Categories from '../components/Categories/Categories';
 import { useDateTime } from '../components/functions';
-import React, { useEffect } from 'react';
+import AddTodo from '../components/Add-Todo/AddTodo';
+import React, { useEffect, useState } from 'react';
+import { FaPlus } from 'react-icons/fa6';
 import './Todo.scss';
 
 export default function Todo() {
+	const [add, setAdd] = useState<boolean>(false);
 	const { day, getDayTime } = useDateTime();
 
 	useEffect(() => {
@@ -19,6 +22,10 @@ export default function Todo() {
 				<h1>{day.time}</h1>
 			</div>
 			<Categories />
+			{add && <AddTodo setAdd={setAdd} />}
+			<button className='add-button' onClick={() => setAdd(true)}>
+				<FaPlus size={30} color='#041A56' />
+			</button>
 		</section>
 	);
 }

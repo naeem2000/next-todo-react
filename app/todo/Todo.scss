@@ -11,4 +11,17 @@
             font-weight: 500;
         }
     }
+
+    .add-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+        border-radius: 100%;
+        border: none;
+        cursor: pointer;
+    }
 }

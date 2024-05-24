@@ -4,10 +4,13 @@
 :root {
     --pink: #F300FE;
     --blue: #304b9C;
+    --black: #000000;
     --white: #FFFFFF;
     --green: #A4F4B3;
     --light-purple: #7C8AB7;
     --lighter-blue: #3a5abb;
+    --opacity-black: rgba(0, 0, 0, 0.452);
+    --opacity-grey: rgba(110, 110, 110, 0.603);
 }
 
 * {
