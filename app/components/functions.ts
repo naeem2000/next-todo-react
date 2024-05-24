@@ -7,7 +7,11 @@ export const useDateTime = () => {
 		time: '',
 	});
 	const getDayTime = () => {
-		const currentDate = new Date().toLocaleDateString();
+		const currentDate = new Date().toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: '2-digit',
+		});
 		const currentTime = new Date().toLocaleTimeString('en-US', {
 			hour: '2-digit',
 			minute: '2-digit',

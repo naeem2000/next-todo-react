@@ -1,0 +1,109 @@
+.categories {
+
+    h2 {
+        font-size: 20px;
+        color: var(--white);
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    .boxes {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+
+        .category {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            max-width: 250px;
+            max-height: 100px;
+            width: 100%;
+            height: 100%;
+            background: var(--light-purple);
+            border-radius: 30px;
+            padding: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all ease .2s;
+
+            h3 {
+                color: var(--white);
+                font-weight: 300;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                transform: scale(1.05);
+                border-right: 10px solid var(--pink);
+            }
+
+            &:nth-child(2):hover {
+                border-right: 10px solid var(--green);
+            }
+
+            &:nth-child(3):hover {
+                border-right: 10px solid var(--white);
+            }
+        }
+
+    }
+
+}
+
+.work {
+    border-right: 10px solid var(--pink);
+    transform: scale(1.05);
+}
+
+.personal {
+    border-right: 10px solid var(--green);
+    transform: scale(1.05);
+}
+
+.other {
+    border-right: 10px solid var(--white);
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 850px) {
+    .categories {
+
+        h2 {
+            font-size: 18px;
+        }
+
+        .boxes {
+            justify-content: center;
+            flex-wrap: nowrap;
+
+            .category {
+                margin: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .categories {
+
+        h2 {
+            font-size: 18px;
+        }
+
+        .boxes {
+            justify-content: center;
+            flex-wrap: wrap;
+
+            .category {
+                margin: 10px;
+            }
+        }
+    }
+}

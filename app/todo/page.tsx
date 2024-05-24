@@ -1,7 +1,9 @@
 'use client';
 
+import Categories from '../components/Categories/Categories';
 import { useDateTime } from '../components/functions';
 import React, { useEffect } from 'react';
+import './Todo.scss';
 
 export default function Todo() {
 	const { day, getDayTime } = useDateTime();
@@ -11,11 +13,12 @@ export default function Todo() {
 	}, []);
 
 	return (
-		<section className='todo'>
+		<section className='todo max-width'>
 			<div className='date'>
-				<p>{day.date}</p>
-				<p>{day.time}</p>
+				<h1>{day.date}</h1>
+				<h1>{day.time}</h1>
 			</div>
+			<Categories />
 		</section>
 	);
 }
