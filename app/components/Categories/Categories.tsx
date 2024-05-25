@@ -34,21 +34,31 @@ export default function Categories() {
 			<div className='boxes'>
 				<div
 					className={`category ${active === 'work' && 'work'}`}
-					onClick={() => filterItems('work')}
+					onClick={
+						active !== 'work' ? () => filterItems('work') : () => setActive('')
+					}
 				>
 					<h3>Work</h3>
 					<p>2/5 done</p>
 				</div>
 				<div
 					className={`category ${active === 'personal' && 'personal'}`}
-					onClick={() => filterItems('personal')}
+					onClick={
+						active !== 'personal'
+							? () => filterItems('personal')
+							: () => setActive('')
+					}
 				>
 					<h3>Personal</h3>
 					<p>2/5 done</p>
 				</div>
 				<div
 					className={`category ${active === 'other' && 'other'}`}
-					onClick={() => filterItems('other')}
+					onClick={
+						active !== 'other'
+							? () => filterItems('other')
+							: () => setActive('')
+					}
 				>
 					<h3>Other</h3>
 					<p>2/5 done</p>

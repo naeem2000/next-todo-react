@@ -14,7 +14,6 @@ export default function Todo() {
 	const { day, getDayTime } = useDateTime();
 
 	useEffect(() => {
-		getDayTime();
 		const getTodos = () => {
 			const items = localStorage.getItem('todos');
 			if (items) {
@@ -26,6 +25,19 @@ export default function Todo() {
 
 	console.log(todos);
 
+	useEffect(() => {
+		getDayTime();
+		const interval = setInterval(() => {
+			getDayTime();
+		}, 60000);
+		return () => clearInterval(interval);
+	}, []);
+
+	const addTodo = (newTodo: Todos) => {
+		setTodos((prevTodos) => [...prevTodos, newTodo]);
+		localStorage.setItem('todos', JSON.stringify([...todos, newTodo]));
+	};
+
 	return (
 		<section className='todo max-width'>
 			<div className='date'>
@@ -33,13 +45,15 @@ export default function Todo() {
 				<h1>{day.time}</h1>
 			</div>
 			<Categories />
-			{add && <AddTodo setAdd={setAdd} />}
+			{add && <AddTodo setAdd={setAdd} addTodo={addTodo} />}
 			<div className='todo-list'>
-				{todos?.map((item) => {
+				{todos?.map((item, index: number) => {
 					return (
-						<>
+						<div className='todo-item' key={index}>
 							<h1>{item.title}</h1>
-						</>
+							<p>{item.description}</p>
+							<p>{item.time}</p>
+						</div>
 					);
 				})}
 			</div>
