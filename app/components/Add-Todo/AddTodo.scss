@@ -39,20 +39,24 @@
         input,
         textarea,
         select {
-            margin-bottom: 40px;
             border-radius: 5px;
             padding: 5px 10px;
             border: 1px solid var(--opacity-grey);
             font-size: 16px;
         }
 
+        p {
+            margin: 5px 0 15px;
+            color: red;
+
+            &:last-child {
+                margin: 5px 0 0px;
+            }
+        }
+
         .add-bottom {
             display: flex;
             justify-content: space-between;
-
-            select {
-                margin: 0;
-            }
         }
 
         button {
@@ -65,6 +69,7 @@
             border-radius: 5px;
             transition: all ease .5s;
             font-weight: 400;
+            height: 40px;
 
             &:hover {
                 background: white;
