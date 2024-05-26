@@ -52,7 +52,10 @@ export default function Todo() {
 						<div className='todo-item' key={index}>
 							<h1>{item.title}</h1>
 							<p>{item.description}</p>
-							<p>{item.time}</p>
+							<p>{item.tag}</p>
+							<div>
+								<p>{item.timeFrom}</p> <p>{item.timeTo}</p>
+							</div>
 						</div>
 					);
 				})}
