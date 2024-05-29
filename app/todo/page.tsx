@@ -54,6 +54,10 @@ export default function Todo() {
 							<div>
 								<p>{item.timeFrom}</p> <p>{item.timeTo}</p>
 							</div>
+							<div>
+								<p>time logged:</p>
+								<p>{item.time}</p>
+							</div>
 						</div>
 					);
 				})}

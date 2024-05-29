@@ -1,9 +1,9 @@
 'use client';
 
-import { BsPencil } from 'react-icons/bs';
-import './Categories.scss';
 import React, { useEffect, useState } from 'react';
 import { Todos } from '@/app/modules/modules';
+import { BsPencil } from 'react-icons/bs';
+import './Categories.scss';
 
 //interface for props from parent component
 type Props = {
@@ -23,12 +23,6 @@ export default function Categories({ setTodos, todos }: Props) {
 		setTodos(filteredTodos);
 	}
 
-	//reset upon clicking a category again
-	const resetFilter = () => {
-		setActive('');
-		setTodos(originalTodos);
-	};
-
 	//when component mounts then add original todos from local storage
 	useEffect(() => {
 		const todoers = localStorage.getItem('todos');
@@ -36,6 +30,12 @@ export default function Categories({ setTodos, todos }: Props) {
 			setOriginalTodos(JSON.parse(todoers));
 		}
 	}, [todos]); //rerender when this state changes
+
+	//reset upon clicking a category again
+	const resetFilter = () => {
+		setActive('');
+		setTodos(originalTodos);
+	};
 
 	//function to handle each different category clicked
 	const filterItems = (item: string) => {
@@ -57,6 +57,11 @@ export default function Categories({ setTodos, todos }: Props) {
 		}
 	};
 
+	//function to get length of tags per tag
+	const tagsLength = (tager: string) => {
+		return originalTodos.filter((tag) => tag.tag === tager).length;
+	};
+
 	return (
 		<section className='categories max-width'>
 			<h2>
@@ -71,10 +76,10 @@ export default function Categories({ setTodos, todos }: Props) {
 					}
 				>
 					<h3>Work</h3>
-					<p>2/5 done</p>
+					<p>2/{tagsLength('Work')} done</p>
 				</div>
 				<div
-					className={`category ${active === 'Personal' && 'personal'}`}
+					className={`category ${active === 'personal' && 'personal'}`}
 					onClick={
 						active !== 'personal'
 							? () => filterItems('Personal')
@@ -82,7 +87,7 @@ export default function Categories({ setTodos, todos }: Props) {
 					}
 				>
 					<h3>Personal</h3>
-					<p>2/5 done</p>
+					<p>2/{tagsLength('Personal')} done</p>
 				</div>
 				<div
 					className={`category ${active === 'other' && 'other'}`}
@@ -93,7 +98,7 @@ export default function Categories({ setTodos, todos }: Props) {
 					}
 				>
 					<h3>Other</h3>
-					<p>2/5 done</p>
+					<p>2/{tagsLength('Other')} done</p>
 				</div>
 			</div>
 		</section>

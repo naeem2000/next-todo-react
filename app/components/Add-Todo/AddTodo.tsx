@@ -40,12 +40,13 @@ export default function AddTodo({ setAdd, addTodo }: Props) {
 			titleError: false,
 			descriptionError: false,
 			tagError: false,
+			timeError: false,
 		};
 		if (!todo.title) {
 			newErrors.titleError = true;
 			canSave = false;
 		} else {
-			newErrors.titleError = false;
+			newErrors.descriptionError = false;
 			canSave = true;
 		}
 		if (!todo.description) {
