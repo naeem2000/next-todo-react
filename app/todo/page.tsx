@@ -21,9 +21,7 @@ export default function Todo() {
 			}
 		};
 		getTodos();
-	}, []);
-
-	console.log(todos);
+	}, [setTodos]);
 
 	useEffect(() => {
 		getDayTime();
@@ -44,7 +42,7 @@ export default function Todo() {
 				<h1>{day.date}</h1>
 				<h1>{day.time}</h1>
 			</div>
-			<Categories />
+			<Categories setTodos={setTodos} todos={todos} />
 			{add && <AddTodo setAdd={setAdd} addTodo={addTodo} />}
 			<div className='todo-list'>
 				{todos?.map((item, index: number) => {
@@ -55,6 +53,10 @@ export default function Todo() {
 							<p>{item.tag}</p>
 							<div>
 								<p>{item.timeFrom}</p> <p>{item.timeTo}</p>
+							</div>
+							<div>
+								<p>time logged:</p>
+								<p>{item.time}</p>
 							</div>
 						</div>
 					);
