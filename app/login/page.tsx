@@ -4,7 +4,6 @@ import { User, UserError } from '../modules/modules';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import React, { useState } from 'react';
 import './Login.scss';
-import { error } from 'console';
 
 export default function Login() {
 	const [visible, setVisible] = useState<boolean>(false);

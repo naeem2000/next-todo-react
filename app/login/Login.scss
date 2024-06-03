@@ -49,7 +49,7 @@
         button {
             align-self: center;
             position: relative;
-            width: 120px;
+            width: 150px;
             background: var(--white);
             padding: 10px 20px;
             color: var(--blue);
@@ -60,6 +60,42 @@
             overflow: hidden;
             border: none;
             cursor: pointer;
+
+            &:hover {
+                background: var(--blue);
+                color: var(--white);
+            }
+
+            &::after {
+                content: '→';
+                position: absolute;
+                font-size: 25px;
+                top: 5px;
+                transform: translateX(40px);
+                transition: transform 0.5s;
+            }
+
+            &:hover::after {
+                transform: translateX(5px);
+                color: var(--white);
+            }
+        }
+
+        button.register {
+            align-self: center;
+            position: relative;
+            width: 150px;
+            background: var(--white);
+            padding: 10px 20px;
+            color: var(--blue);
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 20px;
+            transition: all ease .5s;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            margin-top: 30px;
 
             &:hover {
                 background: var(--blue);
