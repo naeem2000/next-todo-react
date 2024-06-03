@@ -1,9 +1,11 @@
 'use client';
 
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { ToastContainer, toast } from 'react-toastify';
 import { User, UserError } from '../modules/modules';
-import { auth } from '../components/firebase';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
+import 'react-toastify/dist/ReactToastify.css';
+import { auth } from '../components/firebase';
 import React, { useState } from 'react';
 import '../login/Login.scss';
 
@@ -60,7 +62,7 @@ export default function Register() {
 				})
 				.catch((error) => {
 					if (error.code === 'auth/email-already-in-use') {
-						console.log('error');
+						toast.error('User already exists...');
 					}
 				});
 		}

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.scss';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
 	title: 'Mira',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body>{children}</body>
+			<body>
+				{children} <ToastContainer />
+			</body>
 		</html>
 	);
 }
