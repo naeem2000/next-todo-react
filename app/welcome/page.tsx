@@ -22,9 +22,11 @@ export default function Welcome() {
 					easier. Join the Mira community today and unleash your productivity
 					potential!
 				</p>
-				<Link href={'/todo'} rel='noreferrer'>
-					Let&apos;s get started
-				</Link>
+				<div className='animated-button'>
+					<Link href={'/todo'} rel='noreferrer'>
+						Let&apos;s get started
+					</Link>
+				</div>
 			</div>
 		</section>
 	);

@@ -1,0 +1,84 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 150px 0px;
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .login-body {
+        display: flex;
+        flex-direction: column;
+        background: var(--blue);
+        padding: 30px;
+        border-radius: 20px;
+
+        p {
+            font-weight: 500;
+            color: var(--white);
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 10px 10px;
+            width: 400px;
+        }
+
+        >div {
+            position: relative;
+
+            .eye-icon {
+                cursor: pointer;
+                position: absolute;
+                top: 7px;
+                right: 10px;
+            }
+        }
+
+        .login-error {
+            color: var(--red);
+            font-size: 15px;
+            margin-top: 5px;
+            margin-bottom: 0;
+        }
+
+        button {
+            align-self: center;
+            position: relative;
+            width: 120px;
+            background: var(--white);
+            padding: 10px 20px;
+            color: var(--blue);
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 20px;
+            transition: all ease .5s;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                background: var(--blue);
+                color: var(--white);
+            }
+
+            &::after {
+                content: '→';
+                position: absolute;
+                font-size: 25px;
+                top: 5px;
+                transform: translateX(40px);
+                transition: transform 0.5s;
+            }
+
+            &:hover::after {
+                transform: translateX(5px);
+                color: var(--white);
+            }
+        }
+    }
+}

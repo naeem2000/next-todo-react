@@ -10,46 +10,16 @@
         justify-content: center;
         flex-direction: column;
 
-        h1 {
-            font-size: 60px;
-            color: var(--white);
-            margin-bottom: 50px;
-        }
-
         p {
             font-size: 20px;
             color: var(--white);
             max-width: 1200px;
         }
 
-        a {
-            position: relative;
-            margin-top: 80px;
-            background: var(--blue);
-            padding: 10px 40px;
-            color: var(--white);
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 20px;
-            transition: all ease .5s;
+        .animated-button {
+            margin-top: 40px;
             overflow: hidden;
-
-            &:hover {
-                background: var(--lighter-blue);
-            }
-
-            &::after {
-                content: '→';
-                position: absolute;
-                font-size: 25px;
-                top: 5px;
-                transform: translateX(40px);
-                transition: transform 0.5s;
-            }
-
-            &:hover::after {
-                transform: translateX(5px);
-            }
+            padding: 10px 0px;
         }
     }
 }
