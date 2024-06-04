@@ -1,12 +1,14 @@
 'use client';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { ToastContainer, toast } from 'react-toastify';
 import { User, UserError } from '../modules/modules';
+import { auth, db } from '../components/firebase';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
+import { doc, setDoc } from 'firebase/firestore';
 import 'react-toastify/dist/ReactToastify.css';
-import { auth } from '../components/firebase';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import '../login/Login.scss';
 
 export default function Register() {
@@ -23,9 +25,41 @@ export default function Register() {
 		passwordError: false,
 	});
 
+	const route = useRouter();
+
+	const addUser = async () => {
+		try {
+			const authResult = await createUserWithEmailAndPassword(
+				auth,
+				register.email,
+				register.password
+			);
+			localStorage.setItem('userId', JSON.stringify(auth.currentUser));
+			const {
+				user: { uid },
+			} = authResult;
+			const userDocRef = doc(db, 'users', uid);
+			await setDoc(userDocRef, {
+				username: register.name,
+				email: register.email,
+			});
+			toast.success('Welcome to Mira!');
+			setRegister({
+				name: '',
+				email: '',
+				password: '',
+			});
+			route.push('/todo');
+		} catch (error: any) {
+			if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
+				toast.error('Email already in use');
+			}
+		}
+	};
+
 	const onSubmit = async (e: any) => {
 		e.preventDefault();
-		let canLogin: boolean = false;
+		let canRegister: boolean = false;
 		const registerErrors: Partial<UserError> = {
 			nameError: false,
 			emailError: false,
@@ -33,38 +67,31 @@ export default function Register() {
 		};
 
 		if (!register.name) {
-			canLogin = false;
+			canRegister = false;
 			registerErrors.nameError = true;
 		} else {
-			canLogin = true;
+			canRegister = true;
 			registerErrors.nameError = false;
 		}
 		if (!register.email) {
-			canLogin = false;
+			canRegister = false;
 			registerErrors.emailError = true;
 		} else {
-			canLogin = true;
+			canRegister = true;
 			registerErrors.emailError = false;
 		}
 		if (!register.password) {
-			canLogin = false;
+			canRegister = false;
 			registerErrors.passwordError = true;
 		} else {
-			canLogin = true;
+			canRegister = true;
 			registerErrors.passwordError = false;
 		}
+
 		setRegisterError({ ...registerError, ...registerErrors });
-		if (canLogin) {
-			createUserWithEmailAndPassword(auth, register.email, register.password)
-				.then((userCredential) => {
-					const user = userCredential.user;
-					localStorage.setItem('user', JSON.stringify(user));
-				})
-				.catch((error) => {
-					if (error.code === 'auth/email-already-in-use') {
-						toast.error('User already exists...');
-					}
-				});
+
+		if (canRegister) {
+			addUser();
 		}
 	};
 

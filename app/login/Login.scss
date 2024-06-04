@@ -71,7 +71,7 @@
                 position: absolute;
                 font-size: 25px;
                 top: 5px;
-                transform: translateX(40px);
+                transform: translateX(50px);
                 transition: transform 0.5s;
             }
 
@@ -95,7 +95,6 @@
             overflow: hidden;
             border: none;
             cursor: pointer;
-            margin-top: 30px;
 
             &:hover {
                 background: var(--blue);

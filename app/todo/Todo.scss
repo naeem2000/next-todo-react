@@ -1,5 +1,17 @@
 .todo {
-    padding: 120px 0px 0px;
+
+
+    .header-items {
+        padding: 50px 0px 100px;
+        display: flex;
+        justify-content: space-between;
+
+        p {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 25px;
+        }
+    }
 
     .date {
         text-align: center;

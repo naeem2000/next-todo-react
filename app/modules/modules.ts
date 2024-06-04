@@ -33,6 +33,11 @@ export interface User {
 	password: string;
 }
 
+export interface UserLogin {
+	email: string;
+	password: string;
+}
+
 export interface UserError {
 	nameError: boolean;
 	emailError: boolean;

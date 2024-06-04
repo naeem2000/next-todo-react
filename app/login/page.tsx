@@ -1,14 +1,16 @@
 'use client';
 
-import { User, UserError } from '../modules/modules';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { UserLogin, UserError } from '../modules/modules';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
+import { auth } from '../components/firebase';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import './Login.scss';
 
 export default function Login() {
 	const [visible, setVisible] = useState<boolean>(false);
-	const [login, setLogin] = useState<User>({
-		name: '',
+	const [login, setLogin] = useState<UserLogin>({
 		email: '',
 		password: '',
 	});
@@ -19,6 +21,19 @@ export default function Login() {
 		passwordError: false,
 	});
 
+	const route = useRouter();
+
+	const loginUser = async () => {
+		signInWithEmailAndPassword(auth, login.email, login.password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				localStorage.setItem('userId', JSON.stringify(user));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	const onSubmit = (e: any) => {
 		e.preventDefault();
 		let canLogin: boolean = false;
@@ -27,14 +42,6 @@ export default function Login() {
 			emailError: false,
 			passwordError: false,
 		};
-
-		if (!login.name) {
-			canLogin = false;
-			loginErrors.nameError = true;
-		} else {
-			canLogin = true;
-			loginErrors.nameError = false;
-		}
 		if (!login.email) {
 			canLogin = false;
 			loginErrors.emailError = true;
@@ -51,7 +58,8 @@ export default function Login() {
 		}
 		setLoginError({ ...loginError, ...loginErrors });
 		if (canLogin) {
-			console.log(login);
+			loginUser();
+			route.push('/todo');
 		}
 	};
 
@@ -59,16 +67,6 @@ export default function Login() {
 		<section className='login'>
 			<h1>Login</h1>
 			<div className='login-body'>
-				<p>Name:</p>
-				<input
-					type='text'
-					placeholder='Name'
-					value={login.name}
-					onChange={(e) => setLogin({ ...login, name: e.target.value })}
-				/>
-				<p className='login-error'>
-					{loginError.nameError ? <>Please enter your name...</> : <>&nbsp;</>}
-				</p>
 				<p>Email:</p>
 				<input
 					type='email'
