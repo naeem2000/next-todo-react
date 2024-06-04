@@ -5,12 +5,6 @@
         padding: 50px 0px 100px;
         display: flex;
         justify-content: space-between;
-
-        p {
-            color: var(--white);
-            font-weight: 500;
-            font-size: 25px;
-        }
     }
 
     .date {
@@ -23,11 +17,32 @@
     }
 
     .todo-list {
+        padding-top: 40px;
+
         .todo-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
+            background: var(--light-purple);
+            height: 100%;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            transition: all ease .5s;
+            color: var(--white);
+
+
+            &:hover {
+                border-left: 10px solid var(--blue);
+                box-shadow: -5px 0px 10px 0px var(--black);
+            }
+
+            >div {
+                width: 20%;
+                word-wrap: break-word;
+                margin-right: 20px;
+            }
         }
     }
 

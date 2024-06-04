@@ -31,7 +31,7 @@ export default function AddTodo({ setAdd, addTodo }: Props) {
 
 	useEffect(() => {
 		getDayTime();
-	}, []);
+	});
 
 	const submit = (e: any) => {
 		e.preventDefault();

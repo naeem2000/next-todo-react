@@ -1,11 +1,9 @@
 'use client';
 
 import Categories from '../components/Categories/Categories';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useDateTime } from '../components/functions';
 import AddTodo from '../components/Add-Todo/AddTodo';
 import React, { useEffect, useState } from 'react';
-import { db } from '../components/firebase';
 import { Todos } from '../modules/modules';
 import { FaPlus } from 'react-icons/fa6';
 import './Todo.scss';
@@ -13,21 +11,7 @@ import './Todo.scss';
 export default function Todo() {
 	const [todos, setTodos] = useState<Todos[]>([]);
 	const [add, setAdd] = useState<boolean>(false);
-	const [userDetails, setUserDetails] = useState<any>();
-	const [userName, setUserName] = useState<string>('');
 	const { day, getDayTime } = useDateTime();
-
-	useEffect(() => {
-		const storedUser = localStorage.getItem('userId');
-		if (storedUser) {
-			try {
-				const parsedDetails = JSON.parse(storedUser);
-				setUserDetails(parsedDetails);
-			} catch (error) {
-				console.error('Error parsing user details:', error);
-			}
-		}
-	}, []);
 
 	useEffect(() => {
 		const getTodos = () => {
@@ -45,42 +29,17 @@ export default function Todo() {
 			getDayTime();
 		}, 60000);
 		return () => clearInterval(interval);
-	}, []);
-
-	useEffect(() => {
-		const getData = async () => {
-			if (userDetails?.uid) {
-				const docRef = doc(db, 'users', userDetails.uid);
-				const docSnap = await getDoc(docRef);
-				if (docSnap.exists()) {
-					const userData = docSnap.data();
-					const username = userData?.username;
-					if (username) {
-						setUserName(username);
-					}
-				} else {
-					console.log('No such document!');
-				}
-			}
-		};
-		getData();
-	}, [userDetails]);
+	});
 
 	const addTodo = (newTodo: Todos) => {
-		const updatedTodos = [...todos, newTodo]; // Create a new array with the new todo
-		setTodos(updatedTodos); // Update state with the new array of todos
-		localStorage.setItem('todos', JSON.stringify(updatedTodos)); // Update local storage with the new array of todos
-
-		if (userDetails?.uid) {
-			const todoRef = doc(db, 'users', userDetails.uid); // Reference to the user document
-			setDoc(todoRef, { todos: updatedTodos }); // Set the 'todos' field with the updated array
-		}
+		const updatedTodos = [...todos, newTodo];
+		setTodos(updatedTodos);
+		localStorage.setItem('todos', JSON.stringify(updatedTodos));
 	};
 
 	return (
 		<section className='todo max-width'>
 			<div className='header-items'>
-				<p>{userName}</p>
 				<button>Sign out</button>
 			</div>
 			<div className='date'>
@@ -93,13 +52,19 @@ export default function Todo() {
 				{todos?.map((item, index: number) => {
 					return (
 						<div className='todo-item' key={index}>
-							<h1>{item.title}</h1>
-							<p>{item.description}</p>
-							<p>{item.tag}</p>
-							<div>
-								<p>{item.timeFrom}</p> <p>{item.timeTo}</p>
+							<div className='todo-title'>
+								<h2>{item.title}</h2>
 							</div>
 							<div>
+								<p>{item.description}</p>
+							</div>
+							<div>
+								<p>{item.tag}</p>
+							</div>
+							<div className='todo-time'>
+								<p>{item.timeFrom}</p> <p>{item.timeTo}</p>
+							</div>
+							<div className='todo-logged'>
 								<p>time logged:</p>
 								<p>{item.time}</p>
 							</div>
